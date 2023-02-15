@@ -1,4 +1,326 @@
-.text {
-  background-color: black;
-  color: red;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button,
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  border-radius: 1px;
+  border: none;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+.main {
+  width: 100%;
+  height: 100vh;
+
+  background: rgb(13, 17, 28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swap-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 530px;
+  width: 100%;
+  border: 1px solid rgb(27, 34, 54);
+  color: rgb(255, 255, 255);
+  border-radius: 16px;
+  padding: 8px;
+  position: relative;
+  background: rgb(13, 17, 28);
+  z-index: 1;
+}
+
+.swap-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px;
+}
+
+.settings-icon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+.swap-content {
+  position: relative;
+}
+
+.swap-input-wrapper {
+  border-radius: 12px;
+  padding: 16px;
+  background-color: rgb(19, 26, 42);
+}
+
+.swap-input-main {
+  display: flex;
+}
+
+.swap-arrow {
+  border-radius: 12px;
+  height: 40px;
+  width: 40px;
+  position: relative;
+  margin: -18px auto;
+  background-color: rgb(41, 50, 73);
+  border: 4px solid rgb(13, 17, 28);
+  z-index: 2;
+}
+
+.swap-arrow-icon {
+  height: 100%;
+  width: 100%;
+}
+
+.swap-input {
+  outline: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 36px;
+  line-height: 44px;
+  color: rgb(255, 255, 255);
+  background: transparent;
+}
+
+.modal-btn {
+  align-items: center;
+  background-color: rgb(41, 50, 73);
+  opacity: 1;
+  box-shadow: none;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  height: unset;
+  border-radius: 16px;
+  outline: none;
+  user-select: none;
+  border: none;
+  font-size: 24px;
+  font-weight: 400;
+  width: initial;
+  padding: 4px 8px 4px 4px;
+  gap: 8px;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  margin-left: 12px;
+  visibility: visible;
+}
+
+.swap-footer {
+  width: 100%;
+}
+
+.swap-button {
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 10px 0 0 0;
+  /* background-color: rgb(19, 26, 42); */
+  width: 100%;
+  background-color: rgba(76, 130, 251, 0.24);
+  color: rgb(76, 130, 251);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.swap-button:disabled {
+  cursor: default;
+  color: gray;
+  border-radius: 12px;
+  padding: 16px;
+  background-color: rgb(19, 26, 42);
+}
+
+.modals-overlay {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 40;
+  background-color: transparent;
+  opacity: 0.3;
+}
+
+.modals-layout {
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  top: -100px;
+  right: 0px;
+  left: 0px;
+  z-index: 50;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modals-background {
+  width: 400px;
+  height: fit-content;
+  position: relative;
+  border-radius: 12px;
+  background-color: rgb(19, 26, 42);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.modals-content-layout {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 24px;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+}
+
+.messageTitle {
+  color: #fff;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.messageContext {
+  padding: 15px 0;
+  color: #fff;
+  white-space: normal;
+  min-height: 30px;
 }
