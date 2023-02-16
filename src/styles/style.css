@@ -133,6 +133,16 @@ input {
   border: none;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 * {
   box-sizing: border-box;
   font-family: "Nanum Gothic", sans-serif;
@@ -178,8 +188,9 @@ input {
   height: 24px;
 }
 
-.swap-content {
+.swap-contents {
   position: relative;
+  width: 100%;
 }
 
 .swap-input-wrapper {
@@ -294,12 +305,32 @@ input {
 }
 
 .modals-background {
+  display: flex;
+  flex-direction: column;
   width: 400px;
   height: fit-content;
+  min-height: 400px;
   position: relative;
   border-radius: 12px;
   background-color: rgb(19, 26, 42);
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.modals-close-button {
+  position: absolute;
+  top: 14px;
+  right: 12px;
+  margin: 0.5rem;
+  background-color: transparent;
+  font-size: 14px;
+  line-height: 20px;
+  color: #fff;
+}
+
+.modals-close-icon {
+  top: 40px;
+  right: 40px;
+  color: #fff;
 }
 
 .modals-content-layout {
@@ -309,6 +340,21 @@ input {
   width: 100%;
   height: 100%;
   color: #fff;
+}
+
+.token-search-input {
+  background: transparent;
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  color: #fff;
+  align-items: center;
+  border-radius: 12px;
+  border: 1px solid rgb(27, 34, 54);
+}
+
+.token-search-input:focus {
+  background: rgb(27, 34, 54);
 }
 
 .messageTitle {
@@ -323,4 +369,101 @@ input {
   color: #fff;
   white-space: normal;
   min-height: 30px;
+}
+
+.token-list-wrapper {
+  border: 1px solid rgb(27, 34, 54);
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.token-list-wrapper > button {
+  padding: 16px;
+  width: 100%;
+  text-align: left;
+  color: white;
+  background: transparent;
+}
+
+.token-list-wrapper > button:hover {
+  cursor: pointer;
+  background-color: rgb(31, 43, 72);
+}
+
+.empty-token-list {
+  margin: 16px;
+  color: #808080;
+}
+
+.token-tags {
+  position: relative;
+  min-height: 48px;
+  width: 98%;
+  white-space: normal;
+  display: inline-block;
+  padding: 10px 0 10px 5px;
+  font-size: 14px;
+}
+
+.token-tag {
+  border-radius: 30px;
+  margin-right: 5px;
+  margin-top: 5px;
+  padding: 7px 14px 4px 14px;
+  font-size: 18px;
+  font-size: 18px;
+  font-weight: 500;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: #5b7362;
+}
+button > .token-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+button > .token-id {
+  font-size: 15px;
+  font-weight: 400;
+  color: #808080;
+}
+
+.swap-result-wrapper {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.swap-result-icon {
+  padding-right: 4px;
+}
+
+.swap-result {
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  padding: 16px;
+  background-color: rgb(19, 26, 42);
+}
+
+.dollar-text {
+  color: #646464;
+  padding-left: 4px;
+}
+.modal-footer {
+  margin: auto 16px 16px 16px;
+  height: 100%;
+}
+
+.token-list-setting {
+  background: rgb(44, 57, 87);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgb(27, 34, 54);
+  margin: auto 0 0 0;
 }
