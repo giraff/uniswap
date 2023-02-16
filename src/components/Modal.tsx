@@ -118,13 +118,11 @@ const Modal = ({
           <button
             key={data.id}
             onClick={() => {
-              //
               if (isType !== "" && isType == "before") {
                 setDefaultBeforeSwap(data);
               } else if (isType !== "" && isType == "after") {
                 setDefaultAfterSwap(data);
               }
-
               // localStorage 저장
               let storage = getItem("tokens");
               let tokenArr = storage?.split(",");
@@ -160,7 +158,11 @@ const Modal = ({
   const searchToken = (keyword: string) => {
     console.log(keyword);
     setTmpList(
-      tokenList.filter((token: TokenListType) => token.name.includes(keyword))
+      tokenList.filter(
+        (token: TokenListType) =>
+          token.name.includes(keyword) ||
+          token.name.includes(keyword.toLocaleUpperCase())
+      )
     );
   };
 

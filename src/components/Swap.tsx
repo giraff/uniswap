@@ -159,7 +159,8 @@ const Swap = () => {
     setCurrentUsd(cntusd);
     // afterInput 설정 (currentUsd 구매가격 /defaultAfterSwap.usd (1개당 달러))
     let newAfterInput = parseFloat((cntusd / defaultAfterSwap.usd).toFixed(10));
-    setAfterInput(newAfterInput);
+    console.log("newAfterInput", newAfterInput);
+    setAfterInput(newAfterInput == 0 ? "" : newAfterInput);
   };
 
   const AfterCalculator = (afterCnt: any) => {
@@ -170,7 +171,9 @@ const Swap = () => {
     let newBeforeInput = parseFloat(
       (cntusd / defaultBeforeSwap.usd).toFixed(10)
     );
-    setBeforeInput(newBeforeInput);
+
+    console.log("newBeforeInput,", newBeforeInput);
+    setBeforeInput(newBeforeInput == 0 ? "" : newBeforeInput);
   };
 
   const getMinus = () => {
@@ -223,9 +226,13 @@ const Swap = () => {
                 {defaultBeforeSwap?.name}
               </button>
             </div>
-            <div className="swap-input-footer">
-              <div>{`$${currentUsd}`}</div>
-            </div>
+            {currentUsd == 0 ? (
+              <></>
+            ) : (
+              <div className="swap-input-footer">
+                <div>{`$${currentUsd}`}</div>
+              </div>
+            )}
           </div>
           <div className="swap-arrow">
             <BsArrowDownShort className="swap-arrow-icon" />
@@ -255,9 +262,13 @@ const Swap = () => {
                 {defaultAfterSwap?.name}
               </button>
             </div>
-            <div className="swap-input-footer">
-              <div>{`$${currentUsd}`}</div>
-            </div>
+            {currentUsd == 0 ? (
+              <></>
+            ) : (
+              <div className="swap-input-footer">
+                <div>{`$${currentUsd}`}</div>
+              </div>
+            )}
           </div>
         </div>
         {afterInput == "" || Number(afterInput) == 0 ? (
