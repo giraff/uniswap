@@ -10,8 +10,10 @@
 
 ```shell
 npm install # 필요한 dependency들을 설치합니다.
+
+npm run build
 ```
 
-그 후, 브라우저에서 직접, 혹은 IDE의 live server 확장 프로그램 등으로 (e.g. [vscode live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer))  index.html을 열면 데모 페이지와 동일한 결과물을 확인할 수 있습니다.
+그 후, 브라우저에서 직접, 혹은 IDE의 live server 확장 프로그램 등으로 (e.g. [vscode live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)) 생성된 build 폴더의 index.html을 열면 데모 페이지와 동일한 결과물을 확인할 수 있습니다.
 
 
