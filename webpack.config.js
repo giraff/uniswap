@@ -21,8 +21,8 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(ts)x?$/,
-        exclude: ["/node_modules/"],
+        test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
         use: ["babel-loader", "ts-loader"],
       },
     ],
