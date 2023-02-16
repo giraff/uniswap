@@ -148,11 +148,19 @@ input[type="number"] {
   font-family: "Nanum Gothic", sans-serif;
 }
 
+:root {
+  --background-color: rgb(13, 17, 28);
+  --background-color-light: rgb(41, 50, 73);
+  --default-text-color: rgb(255, 255, 255);
+  --default-border-color: rgb(27, 34, 54);
+  --description-text-color: #808080;
+}
+
 .main {
   width: 100%;
   height: 100vh;
 
-  background: rgb(13, 17, 28);
+  background: var(--background-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -165,12 +173,12 @@ input[type="number"] {
   justify-content: center;
   max-width: 530px;
   width: 100%;
-  border: 1px solid rgb(27, 34, 54);
-  color: rgb(255, 255, 255);
+  border: 1px solid var(--default-border-color);
+  color: var(--default-text-color);
   border-radius: 16px;
   padding: 8px;
   position: relative;
-  background: rgb(13, 17, 28);
+  background: var(--background-color);
   z-index: 1;
 }
 
@@ -199,6 +207,11 @@ input[type="number"] {
   background-color: rgb(19, 26, 42);
 }
 
+.swap-input-footer {
+  padding: 2px;
+  color: var(--description-text-color);
+}
+
 .swap-input-main {
   display: flex;
 }
@@ -209,8 +222,8 @@ input[type="number"] {
   width: 40px;
   position: relative;
   margin: -18px auto;
-  background-color: rgb(41, 50, 73);
-  border: 4px solid rgb(13, 17, 28);
+  background-color: var(--background-color-light);
+  border: 4px solid var(--background-color);
   z-index: 2;
 }
 
@@ -226,16 +239,16 @@ input[type="number"] {
   text-overflow: ellipsis;
   font-size: 36px;
   line-height: 44px;
-  color: rgb(255, 255, 255);
+  color: var(--default-text-color);
   background: transparent;
 }
 
 .modal-btn {
   align-items: center;
-  background-color: rgb(41, 50, 73);
+  background-color: var(--background-color-light);
   opacity: 1;
   box-shadow: none;
-  color: rgb(255, 255, 255);
+  color: var(--default-text-color);
   cursor: pointer;
   height: unset;
   border-radius: 16px;
@@ -350,11 +363,11 @@ input[type="number"] {
   color: #fff;
   align-items: center;
   border-radius: 12px;
-  border: 1px solid rgb(27, 34, 54);
+  border: 1px solid var(--default-border-color);
 }
 
 .token-search-input:focus {
-  background: rgb(27, 34, 54);
+  background: var(--default-border-color);
 }
 
 .messageTitle {
@@ -372,7 +385,7 @@ input[type="number"] {
 }
 
 .token-list-wrapper {
-  border: 1px solid rgb(27, 34, 54);
+  border: 1px solid var(--default-border-color);
   max-height: 240px;
   overflow-y: auto;
 }
@@ -381,7 +394,7 @@ input[type="number"] {
   padding: 16px;
   width: 100%;
   text-align: left;
-  color: white;
+  color: var(--default-text-color);
   background: transparent;
 }
 
@@ -392,7 +405,7 @@ input[type="number"] {
 
 .empty-token-list {
   margin: 16px;
-  color: #808080;
+  color: var(--description-text-color);
 }
 
 .token-tags {
@@ -426,7 +439,7 @@ button > .token-name {
 button > .token-id {
   font-size: 15px;
   font-weight: 400;
-  color: #808080;
+  color: var(--description-text-color);
 }
 
 .swap-result-wrapper {
@@ -464,6 +477,6 @@ button > .token-id {
   width: 100%;
   padding: 16px;
   border-radius: 12px;
-  border: 1px solid rgb(27, 34, 54);
+  border: 1px solid var(--default-border-color);
   margin: auto 0 0 0;
 }

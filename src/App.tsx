@@ -1,12 +1,8 @@
 import React from "react";
-import Swap from "./components/Swap";
+import Main from "./pages/main";
 
 const App = (): JSX.Element => {
-  return (
-    <div className="main">
-      <Swap></Swap>
-    </div>
-  );
+  return <Main />;
 };
 
 export default App;

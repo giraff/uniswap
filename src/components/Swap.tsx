@@ -12,59 +12,6 @@ export type TokenListType = {
   usd: number;
 };
 
-export const tokenNameList: TokenListType[] = [
-  {
-    name: "ETH",
-    id: "ethereum",
-    usd: 0,
-  },
-  {
-    name: "USDT",
-    id: "tether",
-    usd: 0,
-  },
-  {
-    name: "USDC",
-    id: "usd-coin",
-    usd: 0,
-  },
-  {
-    name: "DAI",
-    id: "dai",
-    usd: 0,
-  },
-  {
-    name: "AAVE",
-    id: "aave",
-    usd: 0,
-  },
-  {
-    name: "WBTC",
-    id: "bitcoin",
-    usd: 0,
-  },
-  {
-    name: "AXS",
-    id: "axie-infinity",
-    usd: 0,
-  },
-  {
-    name: "COMP",
-    id: "compound-coin",
-    usd: 0,
-  },
-  {
-    name: "CRV",
-    id: "curve-dao-token",
-    usd: 0,
-  },
-  {
-    name: "ENS",
-    id: "ethereum-name-service",
-    usd: 0,
-  },
-];
-
 const Swap = () => {
   const [defaultBeforeSwap, setDefaultBeforeSwap] = useState<TokenListType>({
     name: "",
@@ -191,112 +138,100 @@ const Swap = () => {
           setDefaultAfterSwap={setDefaultAfterSwap}
         />
       )}
-      <div className="swap-section">
-        <div className="swap-header">
-          <div>스왑</div>
-          <div>
-            <MdSettings
-              className="settings-icon"
-              onClick={() => alert("준비 중입니다")}
+
+      <div className="swap-contents">
+        <div className="swap-input-wrapper">
+          <div className="swap-input-main">
+            <input
+              type="text"
+              className="swap-input"
+              placeholder="0"
+              value={beforeInput}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                if (handleInput(e)) {
+                  setBeforeInput(e.target.value);
+                  BeforeCalculator(e.target.value);
+                }
+              }}
             />
+            <button
+              className="modal-btn"
+              onClick={() => {
+                setIsType("before");
+                setOpenModal(true);
+              }}
+            >
+              {defaultBeforeSwap?.name}
+            </button>
+          </div>
+          {currentUsd == 0 ? (
+            <></>
+          ) : (
+            <div className="swap-input-footer">
+              <div>{`$${currentUsd}`}</div>
+            </div>
+          )}
+        </div>
+        <div className="swap-arrow">
+          <BsArrowDownShort className="swap-arrow-icon" />
+        </div>
+        <div className="swap-input-wrapper">
+          <div className="swap-input-main">
+            <input
+              type="text"
+              className="swap-input"
+              min={0}
+              placeholder="0"
+              value={afterInput}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                if (handleInput(e)) {
+                  setAfterInput(e.target.value);
+                  AfterCalculator(e.target.value);
+                }
+              }}
+            />
+            <button
+              className="modal-btn"
+              onClick={() => {
+                setIsType("after");
+                setOpenModal(true);
+              }}
+            >
+              {defaultAfterSwap?.name}
+            </button>
+          </div>
+          {currentUsd == 0 ? (
+            <></>
+          ) : (
+            <div className="swap-input-footer">
+              <div>{`$${currentUsd}`}</div>
+            </div>
+          )}
+        </div>
+      </div>
+      {afterInput == "" || Number(afterInput) == 0 ? (
+        <></>
+      ) : (
+        <div className="swap-result-wrapper">
+          <div className="swap-result">
+            <RiErrorWarningLine className="swap-result-icon" />
+            <div>
+              {`1 ${defaultAfterSwap?.name} = ${getMinus()} ${
+                defaultBeforeSwap?.name
+              } `}
+            </div>
+            <div className="dollar-text">{` ($${defaultAfterSwap?.usd})`}</div>
           </div>
         </div>
-        <div className="swap-contents">
-          <div className="swap-input-wrapper">
-            <div className="swap-input-main">
-              <input
-                type="text"
-                className="swap-input"
-                placeholder="0"
-                value={beforeInput}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  if (handleInput(e)) {
-                    setBeforeInput(e.target.value);
-                    BeforeCalculator(e.target.value);
-                  }
-                }}
-              />
-              <button
-                className="modal-btn"
-                onClick={() => {
-                  setIsType("before");
-                  setOpenModal(true);
-                }}
-              >
-                {defaultBeforeSwap?.name}
-              </button>
-            </div>
-            {currentUsd == 0 ? (
-              <></>
-            ) : (
-              <div className="swap-input-footer">
-                <div>{`$${currentUsd}`}</div>
-              </div>
-            )}
-          </div>
-          <div className="swap-arrow">
-            <BsArrowDownShort className="swap-arrow-icon" />
-          </div>
-          <div className="swap-input-wrapper">
-            <div className="swap-input-main">
-              <input
-                type="text"
-                className="swap-input"
-                min={0}
-                placeholder="0"
-                value={afterInput}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  if (handleInput(e)) {
-                    setAfterInput(e.target.value);
-                    AfterCalculator(e.target.value);
-                  }
-                }}
-              />
-              <button
-                className="modal-btn"
-                onClick={() => {
-                  setIsType("after");
-                  setOpenModal(true);
-                }}
-              >
-                {defaultAfterSwap?.name}
-              </button>
-            </div>
-            {currentUsd == 0 ? (
-              <></>
-            ) : (
-              <div className="swap-input-footer">
-                <div>{`$${currentUsd}`}</div>
-              </div>
-            )}
-          </div>
-        </div>
-        {afterInput == "" || Number(afterInput) == 0 ? (
-          <></>
-        ) : (
-          <div className="swap-result-wrapper">
-            <div className="swap-result">
-              <RiErrorWarningLine className="swap-result-icon" />
-              <div>
-                {`1 ${defaultAfterSwap?.name} = ${getMinus()} ${
-                  defaultBeforeSwap?.name
-                } `}
-              </div>
-              <div className="dollar-text">{` ($${defaultAfterSwap?.usd})`}</div>
-            </div>
-          </div>
-        )}
-        <div className="swap-footer">
-          <button
-            disabled={beforeInput == "" || afterInput == ""}
-            className="swap-button"
-            onClick={() => alert("준비 중입니다")}
-          >
-            {beforeInput == "" || afterInput == ""
-              ? `금액을 입력하세요`
-              : `스왑`}
-          </button>
-        </div>
+      )}
+      <div className="swap-footer">
+        <button
+          disabled={beforeInput == "" || afterInput == ""}
+          className="swap-button"
+          onClick={() => alert("준비 중입니다")}
+        >
+          {beforeInput == "" || afterInput == "" ? `금액을 입력하세요` : `스왑`}
+        </button>
       </div>
     </>
   );

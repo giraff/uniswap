@@ -3,6 +3,5 @@ export declare type TokenListType = {
     id: string;
     usd: number;
 };
-export declare const tokenNameList: TokenListType[];
 declare const Swap: () => JSX.Element;
 export default Swap;
