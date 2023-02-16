@@ -1,16 +1,17 @@
 <div align="center">
-  <h1>uniswap👋</h1>
-<p>CRA 없이 만드는 React 개발</p>
+  <h1>uniswap👋 클론코딩 과제</h1>
 </div>
 
-## 1. 프로젝트 초기 설정
+제출자: 황현정
+개발 기간: 2일 (23/02/15 ~ 23/02/17)
 
-웹팩과 리액트를 사용하기 위해 필요한 라이브러리를 설치해보자.
+
+## 💻 로컬에서 uniswap 띄우기
 
 ```shell
-$ npm init -y
+npm install # 필요한 dependency들을 설치합니다.
 ```
 
-위 명령어로 개발 프로젝트를 생성할 수 있다.
+그 후, 브라우저에서 직접, 혹은 IDE의 live server 확장 프로그램 등으로 (e.g. [vscode live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer))  index.html을 열면 데모 페이지와 동일한 결과물을 확인할 수 있습니다.
 
-패키지 이름, 버전 등 프로젝트와 관련된 정보들을 답변하거나, 빈칸으로 두어 기본값을 입력할 수 있다. 모두 기본값을 사용할 것이라면 `-y` 플래그를 붙여 질문을 스킵하고 **package.json** 파일을 생성할 수 있다.
+
