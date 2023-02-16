@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import { getItem, setItem } from "../utils/localStorage";
 
@@ -14,12 +14,16 @@ const Modal = ({
   openModal,
   setOpenModal,
   isType,
+  defaultBeforeSwap,
+  defaultAfterSwap,
   setDefaultBeforeSwap,
   setDefaultAfterSwap,
 }: {
   openModal: boolean;
   setOpenModal: (open: boolean) => void;
   isType: string;
+  defaultBeforeSwap: TokenListType;
+  defaultAfterSwap: TokenListType;
   setDefaultBeforeSwap: (before: TokenListType) => void;
   setDefaultAfterSwap: (after: TokenListType) => void;
 }) => {
@@ -83,9 +87,12 @@ const Modal = ({
     getTokenAllList();
   }, []);
 
+  /**
+   * 모든 토큰의 가격 및 정보 가져오기
+   * @returns
+   */
   async function getTokenAllList() {
     try {
-      // const user = axios.get('https://graph.facebook.com/me');
       const res = await Promise.all(
         tokenNameList.map(async (params) => {
           return axios.get(
@@ -109,6 +116,10 @@ const Modal = ({
     } catch (err) {}
   }
 
+  /**
+   * 토큰 목록 표시
+   * @returns
+   */
   const getTokenList = () => {
     const result: JSX.Element[] = [];
 
@@ -117,6 +128,10 @@ const Modal = ({
         result.push(
           <button
             key={data.id}
+            disabled={
+              (isType == "after" && defaultAfterSwap.id == data.id) ||
+              (isType == "before" && defaultBeforeSwap.id == data.id)
+            }
             onClick={() => {
               if (isType !== "" && isType == "before") {
                 setDefaultBeforeSwap(data);
@@ -140,8 +155,16 @@ const Modal = ({
               setOpenModal(false);
             }}
           >
-            <div className="token-name">{data.name}</div>
-            <div className="token-id">{data.id}</div>
+            <div>
+              <div className="token-name">{data.name}</div>
+              <div className="token-id">{data.id}</div>
+            </div>
+            {(isType == "after" && defaultAfterSwap.id == data.id) ||
+            (isType == "before" && defaultBeforeSwap.id == data.id) ? (
+              <AiOutlineCheck />
+            ) : (
+              <></>
+            )}
           </button>
         );
       });
@@ -155,8 +178,11 @@ const Modal = ({
     return result;
   };
 
+  /**
+   * 토큰 검색
+   * @param keyword
+   */
   const searchToken = (keyword: string) => {
-    console.log(keyword);
     setTmpList(
       tokenList.filter(
         (token: TokenListType) =>
@@ -166,6 +192,10 @@ const Modal = ({
     );
   };
 
+  /**
+   * 최신 토큰 정보 표시
+   * @returns
+   */
   const getLatestToken = () => {
     let storage = getItem("tokens");
     let tokenArr = storage?.split(",");

@@ -3,10 +3,12 @@ declare type TokenListType = {
     id: string;
     usd: number;
 };
-declare const Modal: ({ openModal, setOpenModal, isType, setDefaultBeforeSwap, setDefaultAfterSwap, }: {
+declare const Modal: ({ openModal, setOpenModal, isType, defaultBeforeSwap, defaultAfterSwap, setDefaultBeforeSwap, setDefaultAfterSwap, }: {
     openModal: boolean;
     setOpenModal: (open: boolean) => void;
     isType: string;
+    defaultBeforeSwap: TokenListType;
+    defaultAfterSwap: TokenListType;
     setDefaultBeforeSwap: (before: TokenListType) => void;
     setDefaultAfterSwap: (after: TokenListType) => void;
 }) => JSX.Element;

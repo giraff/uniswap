@@ -254,11 +254,12 @@ input[type="number"] {
   border-radius: 16px;
   outline: none;
   user-select: none;
+  display: flex;
   border: none;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 400;
   width: initial;
-  padding: 4px 8px 4px 4px;
+  padding: 4px 10px;
   gap: 8px;
   -webkit-box-pack: justify;
   justify-content: space-between;
@@ -391,6 +392,9 @@ input[type="number"] {
 }
 
 .token-list-wrapper > button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 16px;
   width: 100%;
   text-align: left;
@@ -401,6 +405,11 @@ input[type="number"] {
 .token-list-wrapper > button:hover {
   cursor: pointer;
   background-color: rgb(31, 43, 72);
+}
+
+.token-list-wrapper > button:disabled {
+  cursor: default;
+  background-color: rgb(10, 17, 35);
 }
 
 .empty-token-list {
@@ -431,12 +440,12 @@ input[type="number"] {
   align-items: center;
   background: #5b7362;
 }
-button > .token-name {
+button > * > .token-name {
   font-size: 20px;
   font-weight: 700;
 }
 
-button > .token-id {
+button > * > .token-id {
   font-size: 15px;
   font-weight: 400;
   color: var(--description-text-color);

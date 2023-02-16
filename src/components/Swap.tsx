@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MdSettings } from "react-icons/md";
+import { MdKeyboardArrowDown } from "react-icons/md";
 import { BsArrowDownShort } from "react-icons/bs";
 import { RiErrorWarningLine } from "react-icons/ri";
 import Modal from "./Modal";
@@ -31,6 +31,9 @@ const Swap = () => {
   const [isType, setIsType] = useState<string>("");
   const [openModal, setOpenModal] = useState<boolean>(false);
 
+  /**
+   * 가장 기본 토큰 (DAI, USDC만) 개별 정보 가져오기
+   */
   async function setDefaultToken() {
     try {
       const res = await Promise.all(
@@ -60,6 +63,9 @@ const Swap = () => {
       console.error(err);
     }
   }
+  /**
+   * useEffect
+   */
   useEffect(() => {
     setDefaultToken();
   }, []);
@@ -76,40 +82,46 @@ const Swap = () => {
       AfterCalculator(afterInput);
   }, [defaultAfterSwap]);
 
+  /**
+   * 입력 예외 처리
+   * @param e
+   * @returns
+   */
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     let evalue = e.target.value;
-    console.log(evalue);
     let pattern1 = /(^\d+$)|(^\d{1,}[.]\d{0,10}$)/;
     if (evalue == "") {
       return true;
     }
     if (!evalue.includes(".") && Number(evalue) == 0 && evalue.length > 1) {
-      console.log("그냥 0");
       return false;
     } else if (evalue.split(".").length > 2) {
-      console.log("소수점?");
       return false;
     } else if (!pattern1.test(evalue)) {
-      console.log("10자리?");
       return false;
     } else if (Number.isNaN(parseInt(evalue))) {
-      console.log("숫자 아님?");
       return false;
     }
-    console.log("정상");
     return true;
   };
 
+  /**
+   * 위 토큰 계산 함수
+   * @param beforeCnt
+   */
   const BeforeCalculator = (beforeCnt: any) => {
     let cntusd = parseFloat((beforeCnt * defaultBeforeSwap?.usd).toFixed(10));
     // currentUsd 설정 (beforeCnt * defaultBeforeSwap.usd)
     setCurrentUsd(cntusd);
     // afterInput 설정 (currentUsd 구매가격 /defaultAfterSwap.usd (1개당 달러))
     let newAfterInput = parseFloat((cntusd / defaultAfterSwap.usd).toFixed(10));
-    console.log("newAfterInput", newAfterInput);
     setAfterInput(newAfterInput == 0 ? "" : newAfterInput);
   };
 
+  /**
+   * 아래 토큰 계산 함수
+   * @param afterCnt
+   */
   const AfterCalculator = (afterCnt: any) => {
     let cntusd = parseFloat((afterCnt * defaultAfterSwap?.usd).toFixed(10));
     // currentUsd 설정 (beforeCnt * defaultBeforeSwap.usd)
@@ -119,11 +131,14 @@ const Swap = () => {
       (cntusd / defaultBeforeSwap.usd).toFixed(10)
     );
 
-    console.log("newBeforeInput,", newBeforeInput);
     setBeforeInput(newBeforeInput == 0 ? "" : newBeforeInput);
   };
 
-  const getMinus = () => {
+  /**
+   * 1 (위 토큰)에 비교한 상대 갯수
+   * @returns
+   */
+  const getSwapRelative = () => {
     return ((beforeInput as number) / (afterInput as number)).toFixed(10);
   };
 
@@ -134,6 +149,8 @@ const Swap = () => {
           openModal={openModal}
           setOpenModal={setOpenModal}
           isType={isType}
+          defaultBeforeSwap={defaultBeforeSwap}
+          defaultAfterSwap={defaultAfterSwap}
           setDefaultBeforeSwap={setDefaultBeforeSwap}
           setDefaultAfterSwap={setDefaultAfterSwap}
         />
@@ -162,6 +179,7 @@ const Swap = () => {
               }}
             >
               {defaultBeforeSwap?.name}
+              <MdKeyboardArrowDown />
             </button>
           </div>
           {currentUsd == 0 ? (
@@ -198,6 +216,7 @@ const Swap = () => {
               }}
             >
               {defaultAfterSwap?.name}
+              <MdKeyboardArrowDown />
             </button>
           </div>
           {currentUsd == 0 ? (
@@ -216,7 +235,7 @@ const Swap = () => {
           <div className="swap-result">
             <RiErrorWarningLine className="swap-result-icon" />
             <div>
-              {`1 ${defaultAfterSwap?.name} = ${getMinus()} ${
+              {`1 ${defaultAfterSwap?.name} = ${getSwapRelative()} ${
                 defaultBeforeSwap?.name
               } `}
             </div>
